@@ -1,4 +1,3 @@
-from django.db import models
 from django.contrib import auth
 from django.db import models as django_models
 from . import managers as user_managers
