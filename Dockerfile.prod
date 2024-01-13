@@ -1,0 +1,29 @@
+FROM python:3.8.15-slim as base
+
+WORKDIR /app
+RUN apt-get update && apt-get install -y libwebp-dev g++ gcc gettext libzbar0 git
+
+FROM base as builder
+
+COPY ./requirements.txt .
+
+RUN pip install --upgrade pip wheel setuptools && \
+    pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels gunicorn django-redis==5.2.0 django-cors-headers==3.7.0 && \   
+    pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
+
+FROM base as runner
+
+RUN apt-get install -y ffmpeg
+
+ADD . .
+COPY --from=builder /app/wheels /wheels
+COPY --from=builder /app/requirements.txt .
+
+RUN pip install --no-cache /wheels/*
+
+COPY entrypoint.sh .
+RUN chmod u+x  entrypoint.sh
+
+ENTRYPOINT ["sh", "entrypoint.sh"]
+
+CMD ["gunicorn", "website.wsgi", "--bind", "0.0.0.0:5000", "-w", "1"]
