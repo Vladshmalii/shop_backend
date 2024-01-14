@@ -27,7 +27,9 @@ INSTALLED_APPS = [
 
 USER_APPS = [
     'utils',
-    'user'
+    'user',
+    'product',
+    'finance'
 ]
 
 LOCALE_PATHS = (
