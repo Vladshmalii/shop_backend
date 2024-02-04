@@ -12,7 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # region		     -----Application Definition-----
 THIRD_PARTY_APPS = [
     'django_seed',
-    'jazzmin'
+    'jazzmin',
+    'rest_framework',
+    'drf_spectacular',
 ]
 
 INSTALLED_APPS = [
@@ -189,10 +191,10 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
-        # 'django.db.backends': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console'],
-        # }
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
     }
 }
 # endregion

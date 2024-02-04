@@ -1,6 +1,6 @@
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'API',
-    'DESCRIPTION': 'Swagger API',
+    'TITLE': 'Shop Backend API',
+    'DESCRIPTION': 'Shop backend Swagger API',
     'VERSION': '0.0.1',
     'SERVE_INCLUDE_SCHEMA': False,
     'COMPONENT_SPLIT_REQUEST': False,

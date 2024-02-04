@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib import auth
 from django.db import models as django_models
 from . import managers as user_managers
-# Create your models here.
 
 
 class User(auth.models.AbstractBaseUser,
@@ -30,19 +29,19 @@ class User(auth.models.AbstractBaseUser,
                                        blank=True,
                                        null=True)
 
-    avatar = django_models.FileField(upload_to="additional_information/files",
-                                     verbose_name="Автар",
-                                     null=True,
-                                     blank=True)
+    avatar = django_models.ImageField(upload_to="additional_information/files",
+                                      verbose_name="Автар",
+                                      null=True,
+                                      blank=True)
 
     born = django_models.DateField(verbose_name="Дата рождения",
                                    blank=True,
                                    null=True)
 
-    # TODO favorites
+    favorites = django_models.ManyToManyField(to="product.Item",
+                                              verbose_name="Избранные продукты")
 
     USERNAME_FIELD = "email"
-
 
     # region             -----Manager-----
     objects = user_managers.CustomAccountManager()
